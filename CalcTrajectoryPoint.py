@@ -25,18 +25,18 @@ def setNextTrajectoryPoint(start_lane, start_offset, start_s, target_length, tar
         return None
 
 
-def setAllTrajectoryPoins(laneID_list, start_offset, start_s, target_length, lane_resolution, tolerance):
-    lane_list = []
+def calcAllTrajectoryPoints(laneID_list, start_offset, start_s, target_length, lane_resolution, tolerance):
+    lane_list = list()
     for lID in laneID_list:
         lane_list.append(ll2_map.laneletLayer.get(lID)) # need to check if laneID is valid and exists in the map
     
     current_point = lg2.ArcCoordinates()
     current_point.distance = start_offset
     current_point.length = start_s
-    start_lane = lane_list[0]
-    print("{}\t{}\t{}".format(laneID_list[0],current_point.distance, current_point.length))
+    print("{}\t{}\t{}".format(laneID_list[0], current_point.distance, current_point.length))
 
-    #for i in range(1, len(lane_list)):
+    result_trajectory = list()
+    
     i = 1
     while i < len(lane_list):
         goal_point = setNextTrajectoryPoint(start_lane=lane_list[i-1],\
@@ -60,15 +60,16 @@ def setAllTrajectoryPoins(laneID_list, start_offset, start_s, target_length, lan
         current_point = goal_point
         
         print("{}\t{}\t{}".format(laneID_list[i],goal_point.distance, goal_point.length))
+        result_trajectory.append([laneID_list[i], goal_point])
         i=i+1
+    return result_trajectory
     
     
 if __name__ == "__main__":
     proj = MGRSProjector(lanelet2.io.Origin(0.0, 0.0))
     ll2_map = lanelet2.io.load("/home/keisuke-ota/autoware_map/followtrajectoryaction_scenario/lanelet2_map.osm", proj)
 
-
-    setAllTrajectoryPoins(laneID_list=[1119,41,48],\
+    calcAllTrajectoryPoints(laneID_list=[1119,41,48],\
                             start_offset=0,\
                             start_s=0,\
                             target_length=16.0,\
