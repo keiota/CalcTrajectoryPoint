@@ -59,7 +59,7 @@ def calcAllTrajectoryPoints(laneID_list, start_offset, start_s, target_length, l
                 i = i-1        
         current_point = goal_point
         
-        print("{}\t{}\t{}".format(laneID_list[i],goal_point.distance, goal_point.length))
+        print("{}\t{}\t{}".format(laneID_list[i],goal_point.length, goal_point.distance))
         result_trajectory.append([laneID_list[i], goal_point])
         i=i+1
     return result_trajectory
