@@ -1,8 +1,8 @@
 # CalcTrajectoryPoint 
 
-This program provides a function to get fixed distanced points on lane-coordinate creating Trajectory for FollowTrajectoryAction scenario. Calculating points needs lanelet2 and lanlet2_extension libraries.
+This program provides a function to get fixed distanced points on lane-coordinate creating a trajectory for FollowTrajectoryAction scenario. Calculating points needs lanelet2 and lanelet2_extension libraries.
 
-## Usage:
+## Usage
 1. pull the branch(https://github.com/soblin/autoware_common/tree/feat/python-binding) and build autoware to install lanelet2 and lanlet2_extension.
 2. set this dirctory under autoware.
 3. change calcAllTrajectoryPoints function's parameters of main as you need. 
@@ -10,47 +10,43 @@ This program provides a function to get fixed distanced points on lane-coordinat
     Parameters detail is written below Functions section.
 4. run `python3 calcTrajectoryPoint.py`
 
-## Functions:
+## Functions
 
 ### calcAllTrajectoryPoints
 
-def calcAllTrajectoryPoints(laneID_list, start_offset, start_s, target_length, lane_resolution, tolerance):
-    
-    Calculates a list of trajectory points.
+Calculates a list of trajectory points.
 
-    Args:
-    - laneID_list: List of laneID which NPC should follow
-    - start_offset: Offset value of beginning points of FollowTrajectoryAction.
-    - start_s: s(length) value of beginning points of FollowTrajectoryAction.
-    - target_length: The constant distance between one point to another which constructs trajectory.
-    - lane_resolution: The resolution when we separate target_lane into points.
-    - tolerance: Tolerance to find a point of target_length from start. 0.1 means the result distance provided by this function at most has 0.1[m] diffarence.
+#### Args
+- laneID_list: List of laneID which NPC should follow
+- start_offset: Offset value of beginning points of FollowTrajectoryAction.
+- start_s: s(length) value of beginning points of FollowTrajectoryAction.
+- target_length: The constant distance between one point to another which constructs trajectory.
+- lane_resolution: The resolution when we separate target_lane into points.
+- tolerance: Tolerance to find a point of target_length from start. 0.1 means the result distance provided by this function at most has 0.1[m] diffarence.
 
-    Returns:
-    - list of laneID and trajectory points if it exists.
-      - Also cullentry output the result on terminal.
-    - None if the trajectory cannot be created perfectly. 
+#### Returns
+- list of laneID and trajectory points if it exists.
+  - Also cullentry output the result on terminal.
+- None if the trajectory cannot be created perfectly. 
 
 ### setNextTrajectoryPoint
 
-def setNextTrajectoryPoint(start_lane, start_offset, start_s, target_length, target_lane, lane_resolution, tolerance):
+Calculates single trajectory from `start_lane` to `target_lane`
 
-    Calculates single trajectory from 'start_lane' to 'target_lane'
+#### Args
+- start_lane: laneID of NPC's current lane.
+- start_offset: Offset value of beginning points of FollowTrajectoryAction.
+- start_s: s(length) value of beginning points of FollowTrajectoryAction.
+- target_length: The constant distance between one point to another which constructs trajectory.
+- target_lane: laneID of next NPC's target point.
+- lane_resolution: The resolution when we separate target_lane into points.
+- tolerance: Tolerance to find a point of target_length from start. 0.1 means the result distance provided by this function at most has 0.1[m] diffarence.
 
-    Args:
-    - start_lane: laneID of NPC's current lane.
-    - start_offset: Offset value of beginning points of FollowTrajectoryAction.
-    - start_s: s(length) value of beginning points of FollowTrajectoryAction.
-    - target_length: The constant distance between one point to another which constructs trajectory.
-    - target_lane: laneID of next NPC's target point.
-    - lane_resolution: The resolution when we separate target_lane into points.
-    - tolerance: Tolerance to find a point of target_length from start. 0.1 means the result distance provided by this function at most has 0.1[m] diffarence.
-    - 
-    Returns:
-    - (offset, s) value of target lane if it exists. value type is 'lanelet2.geometry.ArcCoordinates'
-    - None if this function cannot find any point at target_distance. 
+#### Returns
+- (offset, s) value of target lane if it exists. value type is `lanelet2.geometry.ArcCoordinates`
+- None if this function cannot find any point at target_distance. 
 
-## example
+## Example
 
 ### input
 ```
