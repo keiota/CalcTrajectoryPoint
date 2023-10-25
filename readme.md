@@ -64,10 +64,12 @@ if __name__ == "__main__":
 
 ### output
 ```
+<frozen importlib._bootstrap>:241: RuntimeWarning: to-Python converter for std::shared_ptr<lanelet::Projector> already registered; second conversion method ignored.
 1119	0.0	0.0
-41	-0.0	14.899999999999988
-41	-0.0	30.89999999999991
-41	-0.0	46.800000000000125
-48	0.0	13.899999999999983
+41	14.899999999999988	-0.0
+41	30.89999999999991	-0.0
+41	46.800000000000125	-0.0
+48	13.899999999999983	0.0
+
 
 ```
